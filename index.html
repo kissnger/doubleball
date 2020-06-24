@@ -5,9 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Double Ball</title>
-    <script> 
+    <script>
 
-        function clickMe() { 
+        function clickMe() {
             var redList = [];
             for (let i = 1; i <= 33; i++) {
                 redList.push(i);
@@ -30,10 +30,10 @@
             resultBlue.push(ball);
             blueList.remove(ball);
             resultRed = resultRed.sort(function (a, b) {
-                return a-b
-            }); 
-            document.getElementById("RedContent").innerText =  resultRed
-            document.getElementById("BlueContent").innerText =  resultBlue
+                return a - b
+            });
+            document.getElementById("RedContent").innerText = resultRed
+            document.getElementById("BlueContent").innerText = resultBlue
         }
         //list 中根据 值移除元素
         Array.prototype.remove = function (val) {
@@ -44,16 +44,40 @@
         };
 
     </script>
+    <style>
+        .ballcontent {
+            color: #fff;
+            text-align: center;
+            font: 30px;
+            padding: 10px;
+        }
+
+        .red {
+            background-color: brown;
+        }
+
+        .blue {
+            background-color: blue;
+        }
+
+        .button {
+            background-color: lightgray;
+            margin: 25px;
+            padding: 10px;
+        }
+    </style>
 </head>
 
 <body onload="clickMe()">
     <tr style="display: inline-block;">
         <th>
-            <div id="RedContent" style="width: 30; height: 30; background-color: brown; color: #fff;">红球</div>
-            <div id = "BlueContent" style="width: 30; height: 30; background-color: blue; color: #fff;">篮球</div>
+            <div id="RedContent" class="red ballcontent">红球</div>
+            <div id="BlueContent" class="blue ballcontent">篮球</div>
         </th>
     </tr>
-    <button onclick="clickMe()">开始</button> 
+    <div style=" text-align: center;">
+        <button onclick="clickMe()" class="button">开始</button>
+    </div>
 </body>
 
 </html>

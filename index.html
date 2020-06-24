@@ -1,11 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Double Ball</title>
+    <script> 
+
+        function clickMe() { 
+            var redList = [];
+            for (let i = 1; i <= 33; i++) {
+                redList.push(i);
+            }
+            var blueList = [];
+            for (let i = 1; i <= 16; i++) {
+                blueList.push(i);
+            }
+            var resultRed = [];
+            for (let i = 0; i < 6; i++) {
+                let random = Math.round(Math.random() * (32 - i));
+                console.log(random);
+                let ball = redList[random]
+                resultRed.push(ball);
+                redList.remove(ball);
+            }
+            var resultBlue = [];
+            let random = Math.round(Math.random() * 15);
+            let ball = blueList[random]
+            resultBlue.push(ball);
+            blueList.remove(ball);
+            resultRed = resultRed.sort(function (a, b) {
+                return a-b
+            }); 
+            document.getElementById("RedContent").innerText =  resultRed
+            document.getElementById("BlueContent").innerText =  resultBlue
+        }
+        //list 中根据 值移除元素
+        Array.prototype.remove = function (val) {
+            var index = this.indexOf(val);
+            if (index > -1) {
+                this.splice(index, 1);
+            }
+        };
+
+    </script>
 </head>
-<body>
-    
+
+<body onload="clickMe()">
+    <tr style="display: inline-block;">
+        <th>
+            <div id="RedContent" style="width: 30; height: 30; background-color: brown; color: #fff;">红球</div>
+            <div id = "BlueContent" style="width: 30; height: 30; background-color: blue; color: #fff;">篮球</div>
+        </th>
+    </tr>
+    <button onclick="clickMe()">开始</button> 
 </body>
+
 </html>

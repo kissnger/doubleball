@@ -7,7 +7,7 @@
     <title>Double Ball</title>
     <script>
 
-        function clickMe() {
+        function createBalls() {
             var redList = [];
             for (let i = 1; i <= 33; i++) {
                 redList.push(i);
@@ -31,10 +31,31 @@
             blueList.remove(ball);
             resultRed = resultRed.sort(function (a, b) {
                 return a - b
-            });
-            document.getElementById("RedContent").innerText = resultRed
-            document.getElementById("BlueContent").innerText = resultBlue
+            }); 
+            let content = document.createElement("div");
+            content.classList.add("ballscontent");
+            let redrow = createRedRow(resultRed);
+            let bluerow = createBlueRow(resultBlue);
+            content.appendChild(redrow);
+            content.appendChild(bluerow);
+            document.getElementById("ballcontent").appendChild(content)
         }
+
+        function createRedRow(resultRed) {
+            let div = document.createElement("div")
+            div.classList.add("red");
+            div.classList.add("ballrow")
+            div.innerText = resultRed
+            return div
+        }
+        function createBlueRow(resultBlue) {
+            let div = document.createElement("div")
+            div.classList.add("blue");
+            div.classList.add("ballrow")
+            div.innerText = resultBlue
+            return div
+        }
+
         //list 中根据 值移除元素
         Array.prototype.remove = function (val) {
             var index = this.indexOf(val);
@@ -45,7 +66,11 @@
 
     </script>
     <style>
-        .ballcontent {
+        .ballscontent {
+            text-align: center;
+            margin: 10px;
+        }
+        .ballrow {
             color: #fff;
             text-align: center;
             font: 30px;
@@ -61,26 +86,22 @@
         }
 
         .button {
-            background-color: lightgray;
-            margin: 25px;
-            padding: 10px;
+            background-color: lightgray; 
+            font-size: 15px;
+            padding: 10px 15px;
         }
     </style>
 </head>
 
-<body onload="clickMe()">
+<body onload="createBalls()">
     <h1 style="text-align: center;">
         双色球智能机选
     </h1>
-    <tr style="display: inline-block;">
-        <th>
-            <div id="RedContent" class="red ballcontent">红球</div>
-            <div id="BlueContent" class="blue ballcontent">篮球</div>
-        </th>
-    </tr>
-    <div style=" text-align: center;">
-        <button onclick="clickMe()" class="button">开始</button>
+
+    <div style=" text-align: center;margin: 0px;">
+        <button onclick="createBalls()" class="button">开始</button>
     </div>
+    <div id="ballcontent"> </div> 
 </body>
 
 </html>

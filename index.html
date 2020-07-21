@@ -4,38 +4,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./ball.js"></script>
     <title>Double Ball</title>
     <script>
+        let maxCount = 999999
+
+        function initBalls() {
+            let targetRedBall = [2, 9, 13, 17, 26, 28].toString()
+            let targetBlueBall = [7].toString()
+            var sumCount = 0
+            var flag = false
+            while (flag == false) {
+                let resultRedString = redballList().toString()
+                let resultBlueString = blueballList().toString()
+                let trueRed = targetRedBall === resultRedString
+                let trueBlue = targetBlueBall === resultBlueString
+                // console.log(sumCount + ": " + resultRedString + " " + resultBlueString + " true:" + trueRed + trueBlue +
+                //     " " + targetRedBall + " " + targetBlueBall)
+                if (trueRed == true && trueBlue == true) {
+                    flag = true
+                    alert(sumCount + ": " + resultRedString + " " + resultBlueString)
+                    return
+                } else {
+                    sumCount++
+                }
+                if (sumCount > maxCount) {
+                    alert(sumCount)
+                    return
+                }
+            }
+        }
 
         function createBalls() {
-            var redList = [];
-            for (let i = 1; i <= 33; i++) {
-                redList.push(i);
-            }
-            var blueList = [];
-            for (let i = 1; i <= 16; i++) {
-                blueList.push(i);
-            }
-            var resultRed = [];
-            for (let i = 0; i < 6; i++) {
-                let random = Math.round(Math.random() * (32 - i));
-                console.log(random);
-                let ball = redList[random]
-                resultRed.push(ball);
-                redList.remove(ball);
-            }
-            var resultBlue = [];
-            let random = Math.round(Math.random() * 15);
-            let ball = blueList[random]
-            resultBlue.push(ball);
-            blueList.remove(ball);
-            resultRed = resultRed.sort(function (a, b) {
-                return a - b
-            }); 
             let content = document.createElement("div");
             content.classList.add("ballscontent");
-            let redrow = createRedRow(resultRed);
-            let bluerow = createBlueRow(resultBlue);
+            let redrow = createRedRow(redballList());
+            let bluerow = createBlueRow(blueballList());
             content.appendChild(redrow);
             content.appendChild(bluerow);
             document.getElementById("ballcontent").appendChild(content)
@@ -48,6 +52,7 @@
             div.innerText = resultRed
             return div
         }
+
         function createBlueRow(resultBlue) {
             let div = document.createElement("div")
             div.classList.add("blue");
@@ -63,13 +68,13 @@
                 this.splice(index, 1);
             }
         };
-
     </script>
     <style>
         .ballscontent {
             text-align: center;
             margin: 10px;
         }
+
         .ballrow {
             color: #fff;
             text-align: center;
@@ -86,7 +91,7 @@
         }
 
         .button {
-            background-color: lightgray; 
+            background-color: lightgray;
             font-size: 15px;
             padding: 10px 15px;
         }
@@ -101,7 +106,7 @@
     <div style=" text-align: center;margin: 0px;">
         <button onclick="createBalls()" class="button">开始</button>
     </div>
-    <div id="ballcontent"> </div> 
+    <div id="ballcontent"> </div>
 </body>
 
 </html>

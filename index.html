@@ -12,34 +12,41 @@
         function initBalls() {
             let targetRedBall = [2, 9, 13, 17, 26, 28].toString()
             let targetBlueBall = [7].toString()
+            let targetBall = targetRedBall + ',' + targetBlueBall
             var sumCount = 0
             var flag = false
             while (flag == false) {
                 let resultRedString = redballList().toString()
                 let resultBlueString = blueballList().toString()
-                let trueRed = targetRedBall === resultRedString
-                let trueBlue = targetBlueBall === resultBlueString
+                let resultString = resultRedString + ',' + resultBlueString
+                flag = resultString === targetBall 
                 // console.log(sumCount + ": " + resultRedString + " " + resultBlueString + " true:" + trueRed + trueBlue +
                 //     " " + targetRedBall + " " + targetBlueBall)
-                if (trueRed == true && trueBlue == true) {
-                    flag = true
-                    alert(sumCount + ": " + resultRedString + " " + resultBlueString)
-                    return
-                } else {
-                    sumCount++
-                }
-                if (sumCount > maxCount) {
-                    alert(sumCount)
+                if (flag == true) { 
+                    alert(sumCount + ": " + resultString)
                     return
                 }
+                sumCount++
+                
+                // if (sumCount > maxCount) {
+                //     alert(sumCount)
+                //     return
+                // }
             }
         }
 
         function createBalls() {
+            let redList = redballList()
+            let blueList = blueballList()
+            createBallsView(redList, blueList)
+        }
+
+        function createBallsView(redList, blueList) {
+
             let content = document.createElement("div");
             content.classList.add("ballscontent");
-            let redrow = createRedRow(redballList());
-            let bluerow = createBlueRow(blueballList());
+            let redrow = createRedRow(redList);
+            let bluerow = createBlueRow(blueList);
             content.appendChild(redrow);
             content.appendChild(bluerow);
             document.getElementById("ballcontent").appendChild(content)

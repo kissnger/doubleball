@@ -1,14 +1,17 @@
-function redballList() {
+var redPool = [];
+for (let i = 1; i <= 33; i++) {
+    redPool.push(i);
+}
 
-    var redList = [];
-    for (let i = 1; i <= 33; i++) {
-        redList.push(i);
+function redballList(count) {
+    if (count == null) {
+        count = 6;
     }
-
+    var redList = redPool.concat();
     var resultRed = [];
-    for (let i = 0; i < 6; i++) {
-        let random = Math.round(Math.random() * (32 - i));
-        let ball = redList[random]
+    for (let i = 0; i < count; i++) {
+        let random = Math.round(Math.random() * (redList.length - 1));
+        let ball = redList[random];
         resultRed.push(ball);
         redList.remove(ball);
     }
@@ -17,18 +20,23 @@ function redballList() {
     });
     return resultRed
 }
+var bluePool = [];
+for (let i = 1; i <= 16; i++) {
+    bluePool.push(i);
+}
 
-function blueballList() {
-
-    var blueList = [];
-    for (let i = 1; i <= 16; i++) {
-        blueList.push(i);
+function blueballList(count) {
+    if (count == null) {
+        count = 1;
     }
+    var blueList = bluePool.concat();
     var resultBlue = [];
-    let random = Math.round(Math.random() * 15);
-    let ball = blueList[random]
-    resultBlue.push(ball);
-    blueList.remove(ball);
+    for (let i = 0; i < count; i++) {
+        let random = Math.round(Math.random() * (blueList.length - 1));
+        let ball = blueList[random]
+        resultBlue.push(ball);
+        blueList.remove(ball);
+    }
     return resultBlue
 }
 

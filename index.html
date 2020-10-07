@@ -28,9 +28,11 @@
         }
 
         function createBalls() {
-            let redList = redballList()
-            let blueList = blueballList()
-            createBallsView(redList, blueList)
+            let redList = redballList(mineRedCount);
+            let blueList = blueballList(mineBlueCount);
+            console.log(redList);
+            console.log(blueList);
+            createBallsView(redList, blueList);
         }
 
         function createBallsView(redList, blueList) {
@@ -143,11 +145,10 @@
 
         </div>
     </div>
-
+    <div id="ballcontent"> </div>
     <div style=" text-align: center;margin: 0px;">
         <button onclick="createBalls()" class="button">开始</button>
     </div>
-    <div id="ballcontent"> </div>
 </body>
 
 </html>

@@ -31,3 +31,16 @@ function blueballList() {
     blueList.remove(ball);
     return resultBlue
 }
+
+function selectedCount(pool, count) {
+    var beginResult = 1;
+    for (let i = 1; i <= count; i++) {
+        beginResult = beginResult * i;
+    }
+    var endResult = 1;
+    for (let i = (pool - count + 1); i <= pool; i++) {
+        endResult = endResult * i;
+    }
+    let result = endResult / beginResult;
+    return result
+}

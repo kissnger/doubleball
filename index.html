@@ -7,32 +7,24 @@
     <script src="./ball.js"></script>
     <title>Double Ball</title>
     <script>
-        let maxCount = 999999
+        function loadProcess() {
 
-        function initBalls() {
-            let targetRedBall = [2, 9, 13, 17, 26, 28].toString()
-            let targetBlueBall = [7].toString()
-            let targetBall = targetRedBall + ',' + targetBlueBall
-            var sumCount = 0
-            var flag = false
-            while (flag == false) {
-                let resultRedString = redballList().toString()
-                let resultBlueString = blueballList().toString()
-                let resultString = resultRedString + ',' + resultBlueString
-                flag = resultString === targetBall
-                // console.log(sumCount + ": " + resultRedString + " " + resultBlueString + " true:" + trueRed + trueBlue +
-                //     " " + targetRedBall + " " + targetBlueBall)
-                if (flag == true) {
-                    alert(sumCount + ": " + resultString)
-                    return
-                }
-                sumCount++
-
-                // if (sumCount > maxCount) {
-                //     alert(sumCount)
-                //     return
-                // }
+            createBalls();
+            var mineRed = document.getElementById("mine_red_ball");
+            for (let i = 6; i <= 20; i++) {
+                let option = document.createElement("option");
+                option.innerHTML = i + "个";
+                option.value = i;
+                mineRed.appendChild(option);
             }
+            var mineBlue = document.getElementById("mine_blue_ball");
+            for (let i = 1; i <= 16; i++) {
+                let option = document.createElement("option");
+                option.innerHTML = i + "个";
+                option.value = i;
+                mineBlue.appendChild(option);
+            }
+            updateSelected();
         }
 
         function createBalls() {
@@ -75,6 +67,28 @@
                 this.splice(index, 1);
             }
         };
+
+        var mineRedCount = 6;
+        var mineBlueCount = 1;
+
+        function mineRedBallSelected(index) {
+
+            var mineRed = document.getElementById("mine_red_ball");
+            mineRedCount = mineRed.selectedIndex + 6;
+            updateSelected();
+        }
+
+        function mineBlueBallSelected() {
+            var mineBlue = document.getElementById("mine_blue_ball");
+            mineBlueCount = mineBlue.selectedIndex + 1;
+            updateSelected();
+        }
+
+        function updateSelected() {
+            var selected_ball = document.getElementById("selected_ball");
+            let count = selectedCount(mineRedCount, 6) * mineBlueCount;
+            selected_ball.innerHTML = "投注金额：" + count + "注 " + count * 2 + "元";
+        }
     </script>
     <style>
         .ballscontent {
@@ -102,16 +116,33 @@
             font-size: 15px;
             padding: 10px 15px;
         }
+
+        .selection {
+            background-color: aliceblue;
+        }
     </style>
 </head>
 
-<body onload="createBalls()">
+<body onload="loadProcess()">
     <h1 style="text-align: center;">
         双色球智能机选
     </h1>
-    <h1 style="text-align: center;">
-        新功能开发中
-    </h1>
+
+    <div class="selection">
+        <h1 style="text-align: center;">
+            新功能开发中
+        </h1>
+        <div>
+            我的选择
+        </div>
+        <div>
+            红球： <select name="红球" id="mine_red_ball" onchange="mineRedBallSelected()"> </select>
+            蓝球： <select name="蓝球" id="mine_blue_ball" onchange="mineBlueBallSelected()"> </select>
+        </div>
+        <div id="selected_ball">
+
+        </div>
+    </div>
 
     <div style=" text-align: center;margin: 0px;">
         <button onclick="createBalls()" class="button">开始</button>

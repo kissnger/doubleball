@@ -91,6 +91,10 @@
             let count = selectedCount(mineRedCount, 6) * mineBlueCount;
             selected_ball.innerHTML = "投注金额：" + count + "注 " + count * 2 + "元";
         }
+
+        function reload() {
+            window.location.reload();
+        }
     </script>
     <style>
         .ballscontent {
@@ -148,6 +152,7 @@
     <div id="ballcontent"> </div>
     <div style=" text-align: center;margin: 0px;">
         <button onclick="createBalls()" class="button">开始</button>
+        <button onclick="reload()" class="button">重置</button>
     </div>
 </body>
 

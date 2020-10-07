@@ -37,7 +37,7 @@ function blueballList(count) {
         resultBlue.push(ball);
         blueList.remove(ball);
     }
-    blueList = blueList.sort(function (a, b) {
+    resultBlue = resultBlue.sort(function (a, b) {
         return a - b
     });
     return resultBlue

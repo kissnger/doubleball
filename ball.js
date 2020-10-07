@@ -3,6 +3,10 @@ for (let i = 1; i <= 33; i++) {
     redPool.push(i);
 }
 
+function sortNumber(a, b) {
+    return a - b
+}
+
 function redballList(count) {
     if (count == null) {
         count = 6;
@@ -15,9 +19,7 @@ function redballList(count) {
         resultRed.push(ball);
         redList.remove(ball);
     }
-    resultRed = resultRed.sort(function (a, b) {
-        return a - b
-    });
+    resultRed = resultRed.sort(sortNumber);
     return resultRed
 }
 var bluePool = [];
@@ -37,9 +39,7 @@ function blueballList(count) {
         resultBlue.push(ball);
         blueList.remove(ball);
     }
-    resultBlue = resultBlue.sort(function (a, b) {
-        return a - b
-    });
+    resultBlue = resultBlue.sort(sortNumber);
     return resultBlue
 }
 
